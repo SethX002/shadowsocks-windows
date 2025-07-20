@@ -52,6 +52,13 @@ namespace Shadowsocks.Encryption
                 if (!_registeredEncryptors.ContainsKey(method))
                     _registeredEncryptors.Add(method, typeof(PlainEncryptor));
             }
+
+            // Register HttpMixEncryptor
+            foreach (string method in Shadowsocks.Encryption.Stream.HttpMixEncryptor.SupportedCiphers())
+            {
+                if (!_registeredEncryptors.ContainsKey(method))
+                    _registeredEncryptors.Add(method, typeof(Shadowsocks.Encryption.Stream.HttpMixEncryptor));
+            }
         }
 
         public static IEncryptor GetEncryptor(string method, string password)

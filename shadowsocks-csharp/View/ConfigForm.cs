@@ -34,6 +34,7 @@ namespace Shadowsocks.View
                 "aes-128-gcm",
                 "chacha20-ietf-poly1305",
                 "xchacha20-ietf-poly1305",
+                "http_mix", // Added new encryption method
             };
             public static EncryptionMethod[] AllMethods
             {

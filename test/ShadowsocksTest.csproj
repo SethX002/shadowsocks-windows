@@ -55,6 +55,7 @@
     </Otherwise>
   </Choose>
   <ItemGroup>
+    <Compile Include="HttpMixEncryptorTest.cs" />
     <Compile Include="ProcessEnvironment.cs" />
     <Compile Include="Sip003PluginTest.cs" />
     <Compile Include="UrlTest.cs" />
