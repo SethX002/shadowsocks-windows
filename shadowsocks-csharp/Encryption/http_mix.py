@@ -23,9 +23,14 @@ import struct
 import hmac
 import base64
 import string
-from shadowsocks import common
 
 __all__ = ['ciphers']
+
+def to_bytes(s):
+    if bytes != str:
+        if type(s) == str:
+            return s.encode('utf-8')
+    return s
 
 # HTTP头列表，用于随机选择
 HTTP_HEADERS = [
@@ -258,7 +263,7 @@ class ExtendedTableCipher(object):
         if not data:
             return b''
             
-        data = common.to_bytes(data)
+        data = to_bytes(data)
         
         if self._op:  # 加密
             # 为每个字节存储使用的是基础表还是扩展表
@@ -398,5 +403,16 @@ def test():
     assert plain == decrypted, f"Test failed! {plain} != {decrypted}"
     print("Test passed!")
 
+def print_test_vector():
+    key = b'k' * 16
+    iv = b'i' * 16
+    cipher = create_cipher('http_mix', key, iv, 1)
+    plain = b'Hello, World!'
+    encrypted = cipher.encrypt_once(plain)
+    print('Input:', plain)
+    print('Key:', key)
+    print('Expected encrypted (hex):', encrypted.hex())
+
 if __name__ == '__main__':
-    test() 
+    test()
+    print_test_vector()
